@@ -1,3 +1,5 @@
+[![Pylint](https://github.com/vattikondahemanth/cyientcgiapp/actions/workflows/pylint.yml/badge.svg)](https://github.com/vattikondahemanth/cyientcgiapp/actions/workflows/pylint.yml)
+
 # cyientcgiapp
 
 To run the app 
