@@ -29,7 +29,6 @@ def port_check(host):
         return False
 
 
-
 if not port_check("localhost"):
     print(f"Port {PORT} is not available...")
     sys.exit(0)
