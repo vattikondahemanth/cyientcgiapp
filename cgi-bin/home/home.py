@@ -1,3 +1,5 @@
+""" Home Page """
+
 import home_generator
 
 

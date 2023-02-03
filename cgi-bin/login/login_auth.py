@@ -8,9 +8,9 @@ import mysql.connector
 import login_generator
 
 
-common_path = "cgi-bin/common/"
-current_path = "cgi-bin/login/common"
-shutil.copytree(common_path, current_path)
+COMMON_PATH = "cgi-bin/common/"
+CURRENT_PATH = "cgi-bin/login/common"
+shutil.copytree(COMMON_PATH, CURRENT_PATH)
 
 import common.constant as const # pylint: disable=C0413,C0411,E0401
 
@@ -18,8 +18,8 @@ form = cgi.FieldStorage()
 username = form.getvalue("username")
 password = form.getvalue("password")
 
-username = "Vijaya"
-password= "Vijaya@123"
+# username = "Vijaya"
+# password= "Vijaya@123"
 
 mydb = mysql.connector.connect(
 host = "localhost",
@@ -65,10 +65,11 @@ print(login_generator.cgi_content())
 
 #HTML Webpage
 print(login_generator.webpage_start())
-print(login_generator.web_title('Simple WebApp'))
-print(login_generator.body_start(''))
+print(login_generator.webpage_head('Simple WebApp'))
+print(login_generator.webpage_body_start())
+print(login_generator.webpage_body())
 print(response)
-print(login_generator.body_end())
+print(login_generator.webpage_body_end())
 print(login_generator.webpage_end())
 
-shutil.rmtree(current_path)
+shutil.rmtree(CURRENT_PATH)

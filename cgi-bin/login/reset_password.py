@@ -1,4 +1,5 @@
 ''' Reset password page '''
+
 import reset_password_generator
 
 
