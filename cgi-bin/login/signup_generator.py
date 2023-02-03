@@ -1,4 +1,4 @@
-''' Login base page generator'''
+''' signup base page generator'''
 
 
 def cgi_content(re_type="text/html"):
@@ -29,10 +29,11 @@ def webpage_body():
     print("<div class=\"card\" style=\"width:500px\" >")
     print("""<div class=\"card-header \" align=\"center\" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp    Login   
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp    Sign Up   
         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
-        <a href=\"signup.py\"> Signup </a> </div>""")
+        <a href=\"login.py\"> Login </a> 
+        <p> Please fill in this form to create an account. </p> </div>""")    
     print("<form action=\"/action_page.php\" class=\"card-body\" >")
     print("<div class=\"form-group\">")
     print("<label for=\"email\">Email / Name:</label>")
@@ -42,15 +43,18 @@ def webpage_body():
     print("<label for=\"pwd\">Password:</label>")
     print("<input type=\"password\" class=\"form-control\" id=\"pwd\" placeholder=\"Enter password\" name=\"pswd\">")
     print("</div>")
+    print("<div class=\"form-group\">")
+    print("<label for=\"psw-repeat\">Repeat Password:</label>")
+    print("<input type=\"password\" class=\"form-control\" id=\"psw-repeat\" placeholder=\"Repeat Password\" name=\"pswd\">")
+    print("</div>")
     print("<div class=\"form-group form-check\">")
     print("<label class=\"form-check-label\">")
     print("<input class=\"form-check-input\" type=\"checkbox\" name=\"remember\"> Remember me")
-    print("<a href=\"reset_password.py\"> Reset Password </a>")
     print("</label>")
     print("</div>")
     print("</form>")
     print("<div class=\"card-footer\" align=\"center\" >")
-    print("<button type=\"submit\" class=\"btn btn-primary\">Login</button>")
+    print("<button type=\"submit\" class=\"btn btn-primary\">Sign Up</button>")
     print("<button type=\"button\" class=\"btn btn-danger\"> <a href=\"http://127.0.0.1:8080/cgi-bin/home/home.py\"> Cancel </a></button>")
     # print("<button type=\"button\" class=\"btn btn-danger\">Cancel</button>")
     print("</div>")
