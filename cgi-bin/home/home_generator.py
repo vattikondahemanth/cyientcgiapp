@@ -20,7 +20,7 @@ def body_start(h1_message):
     print("<a href=\"http://127.0.0.1:8080/cgi-bin/login/login.py\"> Login /</a>")
     print("<a href=\"http://127.0.0.1:8080/cgi-bin/login/signup.py\"> Sign Up </a>")
     print("</div>")
-    return '<h1 align="center">' + h1_message + '</h1><p align="center">'
+    return f'<h1 align="center"> {h1_message} </h1><p align="center">'
 
 def body_end():
     """ body_end """
