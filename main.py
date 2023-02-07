@@ -9,6 +9,9 @@ import socket
 import http.server
 import webbrowser
 import sys
+import os
+import warnings
+warnings.filterwarnings("ignore")
 
 
 PORT = 8080
@@ -34,11 +37,16 @@ if not port_check("localhost"):
     sys.exit(0)
 
 
+
 SCRIPT_PATH = "cgi-bin/login/login.py"
 
 Serverclass = http.server.HTTPServer
 Handlerclass = http.server.CGIHTTPRequestHandler
 server_address = ("", PORT)
+Handlerclass.cgi_directories = ["/", "/cgi-bin"]
+
+
+
 
 httpd = Serverclass(server_address, Handlerclass)
 
