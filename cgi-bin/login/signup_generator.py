@@ -1,14 +1,9 @@
-''' Login base page generator'''
+''' signup base page generator'''
 
 
 def cgi_content(re_type="text/html"):
     """ cgi_content """
-    return 'Content type: ' + re_type
-
-def cors_header():
-    """ cors_header """
-    return 'Access-Control-Allow-Origin: *' + '\n\n'
-
+    return 'Content type: ' + re_type + '\n\n'
 
 def webpage_start():
     """ webpage_start """
@@ -28,34 +23,6 @@ def webpage_head(title):
             </script>""")
     print("""<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/
             bootstrap.bundle.min.js\"></script>""")
-
-    print("""<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/
-            3.6.1/jquery.min.js\"></script>""")
-
-
-    print("<script>")
-    print("$(document).ready(function(){")
-    print("$(\"#submit_btn\").click(function(){")
-    print("var form = $(\"#login_form\");")
-    print("$.ajax(")
-    print("{")
-    print("url: \"login_auth.py\",")
-    print("type: \"POST\",")
-    print("data: form.serialize(),")
-    print("success: function(result){")
-    print("console.log(result.trim());")
-    print("result = JSON.parse(JSON.stringify(result));")
-    print("$(\"#div1\").html(result[\"a\"]);")
-    print("},")
-    print("error: function(result){")
-    print("console.log(data)")
-    print("}")
-    print("}")
-    print(");")
-    print("});")
-    print("});")
-    print("</script>")
-
     print("</head>")
     return ""
 
@@ -69,51 +36,43 @@ def webpage_body():
     print("<div class=\"card\" style=\"width:500px\" >")
     print("""<div class=\"card-header \" align=\"center\" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp    Login   
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp    Sign Up   
         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
-        <a href=\"signup.py\"> Signup </a> </div>""")
-
-    print("<form id=\"login_form\" action=\"login_auth.py\" method=\"POST\"  class=\"card-body\" >")
+        <a href=\"login.py\"> Login </a> 
+        <p> Please fill in this form to create an account. </p> </div>""")
+    print("<form action=\"/action_page.php\" class=\"card-body\" >")
     print("<div class=\"form-group\">")
     print("<label for=\"email\">Email / Name:</label>")
     print("""<input type=\"email\" class=\"form-control\"
-            id=\"email\" placeholder=\"Enter email / name\" name=\"email\" required>""")
+            id=\"email\" placeholder=\"Enter email / name\" name=\"email\" required >""")
     print("</div>")
     print("<div class=\"form-group\">")
     print("<label for=\"pwd\">Password:</label>")
     print("""<input type=\"password\" class=\"form-control\"
-            id=\"pwd\" placeholder=\"Enter password\" name=\"pswd\" required>""")
+            id=\"pwd\" placeholder=\"Enter password\" name=\"pswd\" required >""")
+    print("</div>")
+    print("<div class=\"form-group\">")
+    print("<label for=\"psw_repeat\">Repeat Password:</label>")
+    print("""<input type=\"password\" class=\"form-control\"
+            id=\"psw_repeat\" placeholder=\"Repeat Password\" name=\"psw_repeat\" required >""")
     print("</div>")
     print("<div class=\"form-group form-check\">")
     print("<label class=\"form-check-label\">")
-    print("<input class=\"form-check-input\"  type=\"checkbox\" name=\"remember\" > Remember me")
-    print("<a href=\"reset_password.py\"> Reset Password </a>")
+    print("<input class=\"form-check-input\" type=\"checkbox\" name=\"remember\"> Remember me")
     print("</label>")
     print("</div>")
-    print("<div  class=\"form-group\" align=\"center\" >")
-    print("""<button type=\"submit\" id=\"submit_btn\"
-        class=\"btn btn-primary\">Submit</button>""")
+    print("<div class=\"form-group\" align=\"center\" >")
+    print("<button type=\"submit\" class=\"btn btn-primary\">Submit</button>")
     print("""<button type=\"button\" class=\"btn btn-danger\">
-        <a href=\"http://localhost:8080/cgi-bin/home/home.py\"> Cancel </a> </button>""")
+            <a href=\"http://localhost:8080/cgi-bin/home/home.py\"> Cancel</button>""")
+
     print("</form>")
-
     print("</div>")
     print("</div>")
     print("</div>")
-    print("</div>")
-
-    return ""
-
-def response(data):
-    """ response """
-    message = data["message"]
-    print("<div class=\"alert alert-danger\">")
-    print(f"<strong>{message}</strong>")
     print("</div>")
     return ""
-
-    # print(f"<h2> {message} </h2>")
 
 def webpage_body_end():
     """ webpage_body_end """

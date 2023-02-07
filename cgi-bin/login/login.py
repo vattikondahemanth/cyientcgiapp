@@ -1,11 +1,15 @@
+''' Login base page '''
+
 import login_generator
 
 
 print(login_generator.cgi_content())
+print(login_generator.cors_header())
 
 #HTML Webpage
 print(login_generator.webpage_start())
-print(login_generator.web_title('Simple WebApp'))
-print(login_generator.body_start('This is Login Page '))
-print(login_generator.body_end())
+print(login_generator.webpage_head('Simple WebApp'))
+print(login_generator.webpage_body_start())
+print(login_generator.webpage_body())
+print(login_generator.webpage_body_end())
 print(login_generator.webpage_end())
