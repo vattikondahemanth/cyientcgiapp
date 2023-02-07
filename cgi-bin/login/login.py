@@ -4,6 +4,7 @@ import login_generator
 
 
 print(login_generator.cgi_content())
+print(login_generator.cors_header())
 
 #HTML Webpage
 print(login_generator.webpage_start())
