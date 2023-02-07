@@ -34,7 +34,7 @@ print(login_generator.web_head_stop())
 print(login_generator.body_start())
 
 
-redirectURL = "http://localhost:8080/cgi-bin/home/home.py"
+redirectURL = "/cgi-bin/home/home.py"
 print('<meta http-equiv="refresh" content="0;url='+str(redirectURL)+'" />') 
 
 
