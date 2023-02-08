@@ -24,6 +24,49 @@ def webpage_head(title):
     </script>""")
     print("""<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/
     bootstrap.bundle.min.js\"></script>""")
+
+    #Click the radio button to toggle between password visibility:
+    print("<script>")
+    print("function myFunction() {")
+    print("var x = document.getElementById(\"pwd\");")
+    print("if (x.type === \"password\") {")
+    print("x.type = \"text\";")
+    print("} else {")
+    print("x.type = \"password\";")
+    print("}")
+    print("}")
+    print("</script>")
+
+
+    print("""<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/
+            3.6.1/jquery.min.js\"></script>""")
+
+
+    print("<script>")
+    print("$(document).ready(function(){")
+    print("$(\"#submit_btn\").click(function(){")
+    print("var form = $(\"#resetpwd_form\");")
+    print("$.ajax(")
+    print("{")
+    print("url: \"resetpwd_auth.py\",")
+    print("type: \"POST\",")
+    print("data: form.serialize(),")
+    print("success: function(result){")
+    print("console.log(result.trim());")
+    print("result = JSON.parse(JSON.stringify(result));")
+    print("$(\"#div1\").html(result[\"a\"]);")
+    print("},")
+    print("error: function(result){")
+    print("console.log(data)")
+    print("}")
+    print("}")
+    print(");")
+    print("});")
+    print("});")
+    print("</script>")
+
+
+
     print("</head>")
     return ""
 
@@ -41,7 +84,9 @@ def webpage_body():
         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
         <a href=\"login.py\"> Login </a> </div>""")
-    print("<form action=\"/action_page.php\" class=\"card-body\" >")
+
+    print("""<form id=\"resetpwd_form\" action=\"resetpwd_auth.py\"
+            method=\"POST\" class=\"card-body\" >""")
     print("<div class=\"form-group\">")
     print("<label for=\"email\">Email / Name:</label>")
     print("""<input type=\"email\" class=\"form-control\"
@@ -58,9 +103,10 @@ def webpage_body():
             id=\"pwd_new\" placeholder=\"Enter new password\" name=\"pwd_new\" required >""")
     print("</div>")
     print("<div class=\"form-group\">")
-    print("<label for=\"pwd_repeat\">Repeat Password:</label>")
+    print("<label for=\"pwd_new_repeat\">Repeat Password:</label>")
     print("""<input type=\"password\" class=\"form-control\"
-            id=\"pwd_repeat\" placeholder=\"Repeat new password\" name=\"pwd_repeat\" required >""")
+            id=\"pwd_new_repeat\" placeholder=\"Repeat new password\"
+            name=\"pwd_new_repeat\" required >""")
     print("</div>")
     print("<div class=\"form-group form-check\">")
     print("<label class=\"form-check-label\">")
@@ -68,11 +114,12 @@ def webpage_body():
     print("</label>")
     print("</div>")
     print("<div class=\"form-group\" align=\"center\" >")
-    print("<button type=\"submit\" class=\"btn btn-primary\">Submit</button>")
+    print("""<button type=\"submit\" id=\"submit_btn\"
+        class=\"btn btn-primary\">Submit</button>""")
     print("""<button type=\"button\" class=\"btn btn-danger\">
-            <a href=\"http://localhost:8080/cgi-bin/home/home.py\"> Cancel </a></button>""")
-    # print("<button type=\"button\" class=\"btn btn-danger\">Cancel</button>")
+            <a href=\"http://localhost:8080/cgi-bin/home/home.py\"> Cancel </a> </button>""")
     print("</form>")
+
     print("</div>")
     print("</div>")
     print("</div>")

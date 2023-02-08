@@ -16,7 +16,6 @@ def webpage_head(title):
     """ webpage_head """
     print("<head>")
     print(f"<title> {title} </title>")
-    print('<meta http-equiv="refresh" content="3;url=http://localhost:8080/cgi-bin/home/home.py">') 
     print("</head>")
 
     return ""

@@ -113,7 +113,6 @@ def response(data):
     print("</div>")
     return ""
 
-    # print(f"<h2> {message} </h2>")
 
 def webpage_body_end():
     """ webpage_body_end """
