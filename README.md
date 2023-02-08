@@ -14,3 +14,8 @@ To check pylint issues on all files inside cgi-bin folder
 
 To fix indendation errors
 # autopep8 -i main.py
+
+To enable git hub pre-commit hooks
+
+# pip install pre-commit
+# pre-commit install
