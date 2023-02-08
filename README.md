@@ -19,5 +19,3 @@ To enable git hub pre-commit hooks
 
 # pip install pre-commit
 # pre-commit install
-
-# test

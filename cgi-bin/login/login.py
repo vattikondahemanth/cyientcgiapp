@@ -35,6 +35,3 @@ print(login_generator.read_login_form())
 print(login_generator.body_end())
 
 print(login_generator.webpage_end())
-
-
-print("")
