@@ -3,7 +3,8 @@ repos:
     hooks:
     -   id: pylint
         name: pylint
+        files: ^.*.py$
         entry: python -m pylint
-        always_run: true
         language: system
         types: [python]
+
