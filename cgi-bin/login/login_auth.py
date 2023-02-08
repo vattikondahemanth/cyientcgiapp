@@ -45,7 +45,7 @@ else:
     response["status_code"] = const.HTTP_RESOURCE_NOT_FOUND
 
 cursor.close()
-cursor.commmit()
+mydb.commit()
 mydb.close()
 
 if response["status_code"] == 200:

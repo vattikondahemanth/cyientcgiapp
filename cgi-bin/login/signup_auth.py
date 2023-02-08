@@ -50,6 +50,8 @@ else:
     response["status_code"] = const.HTTP_INFORMATION
 
 cursor.close()
+mydb.commit()
+mydb.close()
 
 print(home_generator.cgi_content())
 
