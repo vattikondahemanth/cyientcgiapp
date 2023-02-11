@@ -2,26 +2,36 @@
 
 import cgitb
 
-from home_profile import employee_data  # pylint: disable=E0401
+try:
+    from home_profile import employee_data  # pylint: disable=E0401
+    
+except ModuleNotFoundError:
+	import os
+	import sys ;
+        
+	sys.path.append(os.getcwd() + '\\cgi-bin\\')
+	from home.home_profile import employee_data
 
 cgitb.enable()
 
 def cgi_content(re_type="text/html"):
     '''Cgi content'''
-    return 'Content type: ' + re_type + '\n\n'
+    return 'Content type: ' + re_type
+
+def cors_header():
+    """ cors_header """
+    return 'Access-Control-Allow-Origin: *' + '\n\n'
 
 def webpage_start():
     '''Webpage start'''
     return '<html>'
 
-def web_title():
-    '''home page web title'''
-
-def body_start():
+def webpage_head(title):
     '''Home page body start'''
     
     print('<head>')
     print('<meta name="viewport" content="width=device-width, initial-scale=1">')
+    print(f"<title> {title} </title>")
     print('<style>')
     
     print('''
@@ -120,22 +130,20 @@ def body_start():
     print("</head>")
     return ''
 
-def home_body():
+def webpage_body_start():
+    """webpage_body_start"""
+    return "<body>"
+
+def webpage_body():
     '''Home page body'''
-    
-    print('<body>')
-    
-    print("<div align=\'right\'>")
-    print("<a href=\"http://localhost:8080/cgi-bin/login/login.py\"> Login /</a>")
-    print("<a href=\"http://localhost:8080/cgi-bin/login/signup.py\"> Sign Up </a>")
-    print("</div>")
 
     print('''
     <ul>
-    <li><a href="#home">Home</a></li>
-    <li><a href="#news">Edit</a></li>
-    <li><a href="#contact">Delete</a></li>
-    <li style="float:right"><a class="active" href="#about">Sign out</a></li>
+    <li><a href=\"http://localhost:8080/cgi-bin/home/home.py\">Home</a></li>
+    <li><a href=\"http://localhost:8080/cgi-bin/home/home_contact.py\">Contact</a></li>
+    <li><a href=\"http://localhost:8080/cgi-bin/home/home_about.py\">About</a></li>
+    <li style="float:right"><a class="active" href=\"http://localhost:8080/cgi-bin/login/login.py\">Login</a></li>
+    <li style="float:right"><a class="active" href=\"http://localhost:8080/cgi-bin/login/signup.py\">Sign Up</a></li>
     </ul>
     ''')
 
@@ -153,8 +161,8 @@ def home_body():
         
         print('''
 		<div class="button-container">
-		<button class="button"> Edit </button>
-		<button class="button">	Delete </button>
+		<button class="button"> <a class="button" href=\"http://localhost:8080/cgi-bin/home/home_employee_edit.py\"> Edit </a></button>
+		<button class="button">	<a class="button" href=\"http://localhost:8080/cgi-bin/home/home_employee_edit.py\"> Delete </a></button>
 		</div>
     ''')
 
@@ -164,7 +172,7 @@ def home_body():
         print("</div>")
     return ''
 
-def body_end():
+def webpage_body_end():
     '''Home page body end'''
     return '</body>'
 
