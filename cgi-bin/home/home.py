@@ -3,6 +3,7 @@
 import home_generator
 
 print(home_generator.cgi_content())
+print(home_generator.cors_header())
 
 #HTML Webpage
 print(home_generator.webpage_start())
