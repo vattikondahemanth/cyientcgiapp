@@ -20,7 +20,7 @@ re_password = form.getvalue("psw_repeat")
 mydb = mysql.connector.connect(
     host = "localhost",
     user = "root",
-    password = "root",
+    password = "root@123",
     database = "cyientapp"
     )
 
@@ -53,40 +53,28 @@ cursor.close()
 mydb.commit()
 mydb.close()
 
-print(home_generator.cgi_content())
+if response["status_code"] == 200:
+    print(home_generator.cgi_content())
+    print(home_generator.cors_header())
 
-#HTML Webpage
-print(home_generator.webpage_start())
-print(home_generator.webpage_head('Simple WebApp'))
-print(home_generator.webpage_body_start())
-print(home_generator.webpage_body(response))
-print(home_generator.webpage_body_end())
-print(home_generator.webpage_end())
+    #HTML Webpage
+    print(home_generator.webpage_start())
+    print(home_generator.webpage_head('Simple WebApp'))
+    print(home_generator.webpage_body_start())
+    print(home_generator.webpage_body())
+    print('<meta http-equiv="refresh" content="0;url=http://localhost:8080/cgi-bin/home/home.py">')
+    print(home_generator.webpage_body_end())
+    print(home_generator.webpage_end())
 
-# if response["status_code"] == 200:
-#     print("Location: http://localhost:8080/cgi-bin/home/home.py")
+else:
 
-#     # print("""<meta http-equiv="refresh"
-                # content="0;url=http://localhost:8080/cgi-bin/home/home.py">""")
-#     print(home_generator.cgi_content())
+    print(signup_generator.cgi_content())
+    print(signup_generator.cors_header())
 
-#     #HTML Webpage
-#     print(home_generator.webpage_start())
-#     print(home_generator.webpage_head('Simple WebApp'))
-#     print(home_generator.webpage_body_start())
-#     print(home_generator.webpage_body('This is Home Page '))
-#     print(home_generator.webpage_body_end())
-#     print(home_generator.webpage_end())
-
-# else:
-
-#     print(signup_generator.cgi_content())
-#     print(signup_generator.cors_header())
-
-#     #HTML Webpage
-#     print(signup_generator.webpage_start())
-#     print(signup_generator.webpage_head('Simple WebApp'))
-#     print(signup_generator.webpage_body_start())
-#     print(signup_generator.webpage_body())
-#     print(signup_generator.webpage_body_end())
-#     print(signup_generator.webpage_end())
+    #HTML Webpage
+    print(signup_generator.webpage_start())
+    print(signup_generator.webpage_head('Simple WebApp'))
+    print(signup_generator.webpage_body_start())
+    print(signup_generator.webpage_body())
+    print(signup_generator.webpage_body_end())
+    print(signup_generator.webpage_end())
