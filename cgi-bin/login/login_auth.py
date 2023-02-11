@@ -8,7 +8,7 @@ import mysql.connector
 import login_generator
 import common.constant as const # pylint: disable=C0413,C0411,E0401
 
-from  home import home_generator
+from home import home_generator
 
 cgitb.enable()
 
@@ -16,13 +16,10 @@ form = cgi.FieldStorage()
 username = form.getvalue("email")
 password = form.getvalue("pswd")
 
-# username = "vijay@abc.com"
-# password= "vijay"
-
 mydb = mysql.connector.connect(
     host = "localhost",
     user = "root",
-    password = "root",
+    password = "root@123",
     database = "cyientapp"
     )
 
@@ -50,12 +47,13 @@ mydb.close()
 
 if response["status_code"] == 200:
     print(home_generator.cgi_content())
+    print(home_generator.cors_header())
 
     #HTML Webpage
     print(home_generator.webpage_start())
     print(home_generator.webpage_head('Simple WebApp'))
     print(home_generator.webpage_body_start())
-    print(home_generator.webpage_body('This is Home Page '))
+    print(home_generator.webpage_body())
     print('<meta http-equiv="refresh" content="0;url=http://localhost:8080/cgi-bin/home/home.py">')
     print(home_generator.webpage_body_end())
     print(home_generator.webpage_end())
@@ -68,7 +66,7 @@ else:
     print(login_generator.webpage_start())
     print(login_generator.webpage_head('Simple WebApp'))
     print(login_generator.webpage_body_start())
-    # print(login_generator.webpage_body())
+    print(login_generator.webpage_body())
     print(f"""<meta http-equiv="refresh" content="0;
             url=http://localhost:8080/cgi-bin/login/login.py?error={response["status_code"]}">""")
     print(login_generator.webpage_body_end())
