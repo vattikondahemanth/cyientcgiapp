@@ -66,39 +66,12 @@ mydb.commit()
 mydb.close()
 
 print(home_generator.cgi_content())
+print(home_generator.cors_header())
 
 #HTML Webpage
 print(home_generator.webpage_start())
 print(home_generator.webpage_head('Simple WebApp'))
 print(home_generator.webpage_body_start())
-print(home_generator.webpage_body(response))
+print(home_generator.webpage_body())
 print(home_generator.webpage_body_end())
 print(home_generator.webpage_end())
-
-# if response["status_code"] == 200:
-#     print("Location: http://localhost:8080/cgi-bin/home/home.py")
-
-#     # print("""<meta http-equiv="refresh"
-            # content="0;url=http://localhost:8080/cgi-bin/home/home.py">""")
-#     print(home_generator.cgi_content())
-
-#     #HTML Webpage
-#     print(home_generator.webpage_start())
-#     print(home_generator.webpage_head('Simple WebApp'))
-#     print(home_generator.webpage_body_start())
-#     print(home_generator.webpage_body('This is Home Page '))
-#     print(home_generator.webpage_body_end())
-#     print(home_generator.webpage_end())
-
-# else:
-
-#     print(reset_password_generator.cgi_content())
-#     print(reset_password_generator.cors_header())
-
-#     #HTML Webpage
-#     print(reset_password_generator.webpage_start())
-#     print(reset_password_generator.webpage_head('Simple WebApp'))
-#     print(reset_password_generator.webpage_body_start())
-#     print(reset_password_generator.webpage_body())
-#     print(reset_password_generator.webpage_body_end())
-#     print(reset_password_generator.webpage_end())

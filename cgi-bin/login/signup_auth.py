@@ -16,11 +16,14 @@ form = cgi.FieldStorage()
 username = form.getvalue("email")
 password = form.getvalue("pswd")
 re_password = form.getvalue("psw_repeat")
+emp_id = form.getvalue("emp_id")
+ph_num = form.getvalue("ph_num")
+address = form.getvalue("address")
 
 mydb = mysql.connector.connect(
     host = "localhost",
     user = "root",
-    password = "root@123",
+    password = "root",
     database = "cyientapp"
     )
 
@@ -34,20 +37,21 @@ if not db_username:
     if re_password == password:
         try:
 
-            cursor.execute(f"""INSERT INTO employee (username, password)
-                            VALUES (\"{username}\", \"{password}\");""")
+            cursor.execute(f"""INSERT INTO employee (username, password, employeeid, phnumber, address)
+                            VALUES (\"{username}\", \"{password}\", \"{emp_id}\", \"{ph_num}\", \"{address}\");""")
             response["message"] = "User Created Successfully"
             response["status_code"] = const.HTTP_SUCCESS
-        except:
+        except mysql.connector.Error as error:
+            response["error_message"] = str(error)
             response["message"] = "Server Error"
             response["status_code"] = const.HTTP_SERVER_ERROR
 
     else:
         response["message"] = "Password not matched"
-        response["status_code"] = const.HTTP_INFORMATION
+        response["status_code"] = const.HTTP_BAD_REQUEST
 else:
     response["message"] = "User Already Exits"
-    response["status_code"] = const.HTTP_INFORMATION
+    response["status_code"] = const.HTTP_BAD_REQUEST
 
 cursor.close()
 mydb.commit()
@@ -76,5 +80,7 @@ else:
     print(signup_generator.webpage_head('Simple WebApp'))
     print(signup_generator.webpage_body_start())
     print(signup_generator.webpage_body())
+    print(f"""<meta http-equiv="refresh" content="0;
+            url=http://localhost:8080/cgi-bin/login/signup.py?error={response["status_code"]}">""")
     print(signup_generator.webpage_body_end())
     print(signup_generator.webpage_end())

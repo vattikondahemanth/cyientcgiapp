@@ -1,15 +1,26 @@
-''' signup base page generator'''
-import cgi
+''' Login base page generator'''
+import cgitb
 
+try:
+    from home_profile import employee_data  # pylint: disable=E0401
+    
+except ModuleNotFoundError:
+	import os
+	import sys ;
+        
+	sys.path.append(os.getcwd() + '\\cgi-bin\\')
+	from home.home_profile import employee_data
+
+cgitb.enable()
 
 def cgi_content(re_type="text/html"):
-    """ cgi_content """
+    '''Cgi content'''
     return 'Content type: ' + re_type
-
 
 def cors_header():
     """ cors_header """
     return 'Access-Control-Allow-Origin: *' + '\n\n'
+
 
 def webpage_start():
     """ webpage_start """
@@ -30,19 +41,6 @@ def webpage_head(title):
     print("""<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/
             bootstrap.bundle.min.js\"></script>""")
 
-    #Click the radio button to toggle between password visibility:
-    print("<script>")
-    print("function myFunction() {")
-    print("var x = document.getElementById(\"pwd\");")
-    print("if (x.type === \"password\") {")
-    print("x.type = \"text\";")
-    print("} else {")
-    print("x.type = \"password\";")
-    print("}")
-    print("}")
-    print("</script>")
-
-
     print("""<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/
             3.6.1/jquery.min.js\"></script>""")
 
@@ -50,10 +48,10 @@ def webpage_head(title):
     print("<script>")
     print("$(document).ready(function(){")
     print("$(\"#submit_btn\").click(function(){")
-    print("var form = $(\"#signup_form\");")
+    print("var form = $(\"#edit_info_form\");")
     print("$.ajax(")
     print("{")
-    print("url: \"signup_auth.py\",")
+    print("url: \"edit_info_auth.py\",")
     print("type: \"POST\",")
     print("data: form.serialize(),")
     print("success: function(result){")
@@ -77,72 +75,51 @@ def webpage_body_start():
     """ webpage_body_start """
     return "<body>"
 
-def webpage_body():
-    """ webpage_body """
+
+def webpage_edit_body(data):
+    """ webpage_edit_body """
     print("<div class=\"container border border-secondary rounded float-justify mt-4 \" ")
     print("<div class=\"card\" style=\"width:500px\" >")
-    print("""<div class=\"card-header \" align=\"center\" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp    Sign Up   
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
-        <a href=\"login.py\"> Login </a> 
-        <p> Please fill in this form to create an account. </p> </div>""")
+    print("""<div class=\"card-header \" align=\"center\" >Edit Info</div>""")
 
-    print("""<form id=\"signup_form\" action=\"signup_auth.py\"
-            method=\"POST\" class=\"card-body\" >""")
+    print("<form id=\"edit_info_form\" action=\"edit_info_auth.py\" method=\"POST\"  class=\"card-body\" >")
+    
     print("<div class=\"form-group\">")
     print("<label for=\"email\">Email / Name :</label>")
-    print("""<input type=\"email\" class=\"form-control\"
+    print(f"""<input type=\"email\" class=\"form-control\" value={data[0][1]}  readonly
             id=\"email\" placeholder=\"Enter email / name\" name=\"email\" required >""")
     print("</div>")
 
     print("<div class=\"form-group\">")
     print("<label for=\"emp_id\">Employee ID :</label>")
-    print("""<input type=\"text\" class=\"form-control\"
+    print(f"""<input type=\"text\" class=\"form-control\" value={data[0][0]}
             id=\"emp_id\" placeholder=\"Enter Employee ID\" name=\"emp_id\" required >""")
     print("</div>")
 
     print("<div class=\"form-group\">")
     print("<label for=\"number\">Phone Number :</label>")
-    print("""<input type=\"ph_num\" class=\"form-control\"
+    print(f"""<input type=\"ph_num\" class=\"form-control\" value={data[0][2]}
             id=\"ph_num\" placeholder=\"Enter Phone Number\" name=\"ph_num\" >""")
     print("</div>")
-
+    address_var = data[0][3]
     print("<div class=\"form-group\">")
     print("<label for=\"text\">Addres :</label>")
-    print("""<input type=\"address\" class=\"form-control\"
+    print(f"""<input type=\"address\" class=\"form-control\" value={address_var}
             id=\"address\" placeholder=\"Enter Addres\" name=\"address\" >""")
     print("</div>")
 
-
-    print("<div class=\"form-group\">")
-    print("<label for=\"pwd\">Password:</label>")
-    print("""<input type=\"password\" class=\"form-control\"
-            id=\"pwd\" placeholder=\"Enter password\" name=\"pswd\" required >""")
-    print("<input type=\"checkbox\" onclick=\"myFunction()\">Show Password")
-    print("</div>")
-    print("<div class=\"form-group\">")
-    print("<label for=\"psw_repeat\">Repeat Password:</label>")
-    print("""<input type=\"password\" class=\"form-control\"
-            id=\"psw_repeat\" placeholder=\"Repeat Password\" name=\"psw_repeat\" required >""")
-    print("</div>")
-    print("<div class=\"form-group form-check\">")
-    print("<label class=\"form-check-label\">")
-    print("<input class=\"form-check-input\" type=\"checkbox\" name=\"remember\"> Remember me")
-    print("</label>")
-    print("</div>")
-    print("<div class=\"form-group\" align=\"center\" >")
+    print("<div  class=\"form-group\" align=\"center\" >")
     print("""<button type=\"submit\" id=\"submit_btn\"
         class=\"btn btn-primary\">Submit</button>""")
     print("""<button type=\"button\" class=\"btn btn-danger\">
-            <a href=\"http://localhost:8080/cgi-bin/home/home.py\"> Cancel </a> </button>""")
+        <a href=\"http://localhost:8080/cgi-bin/home/home.py\"> Cancel </a> </button>""")
     print("</form>")
 
     print("</div>")
     print("</div>")
     print("</div>")
     print("</div>")
+
     return ""
 
 def response(data):
@@ -152,6 +129,7 @@ def response(data):
     print(f"<h6 align=\"center\" > <strong>{message}</strong> </h6>")
     print("</div>")
     return ""
+
 
 def webpage_body_end():
     """ webpage_body_end """

@@ -126,6 +126,16 @@ def webpage_body():
     print("</div>")
     return ""
 
+
+def response(data):
+    """ response """
+    message = data["message"]
+    print("<div class=\"alert alert-danger\">")
+    print(f"<h6 align=\"center\" > <strong>{message}</strong> </h6>")
+    print("</div>")
+    return ""
+
+
 def webpage_body_end():
     """ webpage_body_end """
     return "</body>"

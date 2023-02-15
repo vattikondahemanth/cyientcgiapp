@@ -1,6 +1,5 @@
 ''' Login base page generator'''
 
-
 def cgi_content(re_type="text/html"):
     """ cgi_content """
     return 'Content type: ' + re_type
@@ -35,11 +34,11 @@ def webpage_head(title):
 
     print("<script>")
     print("$(document).ready(function(){")
-    print("$(\"#submit_btn\").click(function(){")
-    print("var form = $(\"#login_form\");")
+    print("$(\"#delete_btn\").click(function(){")
+    print("var form = $(\"#delete_form\");")
     print("$.ajax(")
     print("{")
-    print("url: \"login_auth.py\",")
+    print("url: \"delete_info_auth.py\",")
     print("type: \"POST\",")
     print("data: form.serialize(),")
     print("success: function(result){")
@@ -63,46 +62,28 @@ def webpage_body_start():
     """ webpage_body_start """
     return "<body>"
 
-def webpage_body():
+def webpage_body(username):
     """ webpage_body """
     print("<div class=\"container border border-secondary rounded float-justify mt-4 \" ")
-    print("<div class=\"card\" style=\"width:500px\" >")
-    print("""<div class=\"card-header \" align=\"center\" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp    Login   
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
-        <a href=\"signup.py\"> Signup </a> </div>""")
+    print("<div class=\"card\">")
 
-    print("<form id=\"login_form\" action=\"login_auth.py\" method=\"POST\"  class=\"card-body\" >")
+    print("<form id=\"delete_form\" action=\"delete_info_auth.py\" method=\"POST\"  class=\"card-body\" >")
+
     print("<div class=\"form-group\">")
-    print("<label for=\"email\">Email / Name:</label>")
-    print("""<input type=\"email\" class=\"form-control\"
-            id=\"email\" placeholder=\"Enter email / name\" name=\"email\" required>""")
+    print(f"""<input type=\"hidden\" id=\"username\" value=\"{username}\" name=\"username\">""")
+    print(f"<h1 align=\"center\"> {username} </h1>")
+    print(f"<p align=\"center\"> Are you sure you want to delete <strong> {username} </strong> </p>")
     print("</div>")
-    print("<div class=\"form-group\">")
-    print("<label for=\"pwd\">Password:</label>")
-    print("""<input type=\"password\" class=\"form-control\"
-            id=\"pwd\" placeholder=\"Enter password\" name=\"pswd\" required>""")
-    print("</div>")
-    print("<div class=\"form-group form-check\">")
-    print("<label class=\"form-check-label\">")
-    print("<input class=\"form-check-input\"  type=\"checkbox\" name=\"remember\" > Remember me")
-    print("<a href=\"reset_password.py\"> Reset Password </a>")
-    print("</label>")
-    print("</div>")
+
     print("<div  class=\"form-group\" align=\"center\" >")
-    print("""<button type=\"submit\" id=\"submit_btn\"
-        class=\"btn btn-primary\">Submit</button>""")
+    print("""<button type=\"submit\" id=\"delete_btn\"
+    class=\"btn btn-primary\">Submit</button>""")
     print("""<button type=\"button\" class=\"btn btn-danger\">
-        <a href=\"http://localhost:8080/cgi-bin/home/home.py\"> Cancel </a> </button>""")
+            <a href=\"http://localhost:8080/cgi-bin/home/home.py\"> Cancel </a> </button>""")
+    print("</div>")
     print("</form>")
-
     print("</div>")
     print("</div>")
-    print("</div>")
-    print("</div>")
-
     return ""
 
 def response(data):

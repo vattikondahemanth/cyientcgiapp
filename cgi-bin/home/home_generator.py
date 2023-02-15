@@ -159,12 +159,12 @@ def webpage_body():
         print(f"<p class=\"card-text\"> Phone : {elements[2]}</p>")
         print(f"<p class=\"card-text\"> Location : {elements[3]}</p>")
         
-        print('''
+        print(f'''
 		<div class="button-container">
-		<button class="button"> <a class="button" href=\"http://localhost:8080/cgi-bin/home/home_employee_edit.py\"> Edit </a></button>
-		<button class="button">	<a class="button" href=\"http://localhost:8080/cgi-bin/home/home_employee_edit.py\"> Delete </a></button>
+		<button class="button"> <a class="button" href=\"http://localhost:8080/cgi-bin/home/edit_info.py?username={elements[1]}\"> Edit </a></button>
+		<button class="button">	<a class="button" href=\"http://localhost:8080/cgi-bin/home/delete_info.py?username={elements[1]}\"> Delete </a></button>
 		</div>
-    ''')
+    	''')
 
         print("<br>")
         print("</div>")
